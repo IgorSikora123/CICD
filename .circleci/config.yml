@@ -6,7 +6,7 @@ jobs:
     docker:
       - image: cimg/python:3.10.1
         environment:
-          DATABASE_URL:postgresql://root&localhost/circle_test?sslmode=disable
+          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.2
         environment:
           POSTGRES_USER: root
@@ -18,19 +18,18 @@ jobs:
       - run:
           name: Run tests
           command: pipenv run python manage.py test
-      - storage_test_results:
+      - store_test_results:
           path: test-results
-      - store-artifacts:
+      - store_artifacts:
           path: test-results
           destination: tr1
       - persist_to_workspace:
-          root: -/poject
+          root: ~/project
           paths:
             - .
-
-
+ 
+ 
 workflows:
   on_commit:
     jobs:
-      build_and_test
-
+      - build_and_test
