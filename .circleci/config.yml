@@ -32,4 +32,5 @@ jobs:
 workflows:
   on_commit:
     jobs:
-      - build_and_test
+      build_and_test
+
