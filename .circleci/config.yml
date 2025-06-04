@@ -17,7 +17,7 @@ jobs:
           pkg-manager: pipenv
       - run:
           name: Run tests
-          command: pipenv run python manage.pu test
+          command: pipenv run python manage.py test
       - storage_test_results:
           path: test-results
       - store-artifacts:
