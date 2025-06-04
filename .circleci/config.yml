@@ -13,10 +13,20 @@ jobs:
           POSTGRES_DB: circle_test
     steps:
       - checkout
-      ....
-      ....
-      ....
-      ...
+      - python/install-packages:
+          pkg-manager: pipenv
+      - run:
+          name: Run tests
+          command: pipenv run python manage.pu test
+      - storage_test_results:
+          path: test-results
+      - store-artifacts:
+          path: test-results
+      - persist_to_workspace:
+          root:
+          paths:
+            - test-results
+
 
 workflows:
   on_commit:
